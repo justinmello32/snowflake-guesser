@@ -3,7 +3,8 @@ let gameStarted = false;
 
 
 function setup() {
-    createCanvas(400, 400);
+    var canvas = createCanvas(600, 600);
+    canvas.parent('main');
 }
 
 function draw() {
