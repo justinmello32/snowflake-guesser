@@ -1,1 +1,3 @@
-# snowflake-guesser
+#Snowflake Guesser
+
+##The goal of this game is to....
