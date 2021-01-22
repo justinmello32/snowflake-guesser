@@ -6,29 +6,28 @@ let scoreBoard;
 
 
 function setup() {
+
     //Setup Canvas
     var canvas = createCanvas(500, 500);
     canvas.parent('main');
 
+    //Define Start Button
+    startButton = createButton('Start Game');
+    startButton.addClass('btn');
+    startButton.addClass('btn-success');
+    startButton.position(450, 650);
+    startButton.mousePressed(startGame);
 
-
-        //Define Start Button
-        startButton = createButton('Start Game');
-        startButton.addClass('btn');
-        startButton.addClass('btn-success');
-        startButton.position(450, 650);
-        startButton.mousePressed(startGame);
-
-        //Define Score Area
-        scoreBoard = createDiv('Current Score: ');
-        scoreBoard.position(450, 700);
-        scoreBoard.hide();
+    //Define Score Area
+    scoreBoard = createDiv('Current Score: ');
+    scoreBoard.position(450, 700);
+    scoreBoard.hide();
 
 }
 
 function draw() {
 
-    if (mouseIsPressed) {
+    if (gameStarted) {
         fill(0);
     } else {
         fill(255);
