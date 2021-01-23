@@ -1,10 +1,11 @@
 //Initial Variables
 let gameStarted = false;
 
-//Buttons
+//Buttons and Images
 let startButton;
 let realSnowflakeButton;
 let computerSnowflakeButton;
+let images = [];
 
 //Misc Variables
 let score = 0;
@@ -22,6 +23,12 @@ let thicknesIsLengthDependent = false; //is the stroke thickness dependent on th
 let thicknesFactor = 0.005; //if the stroke thicknes is dependent on the length of the branch, this is multiplied with the length which is multiplied with the thickness
 let strokeAlpha = 25; //alpha of the lines
 
+
+function preload() {
+    for (let i = 1; i < 3; i++) {
+        images[i] = loadImage('assets/snowflake' + i + '.jpg'); // store the image location in array only
+    }
+}
 
 function setup() {
 
@@ -61,8 +68,10 @@ function draw() {
         ellipse(50,50,80,80);
     }
     else {
-        generateSnowflake();
-        console.log("The game has started!");
+        //generateSnowflake();
+        // image(images[2], 0, 0);
+        generateImage();
+        // console.log("The game has started!");
     }
 }
 
@@ -74,6 +83,11 @@ function startGame() {
     computerSnowflakeButton.show();
     gameStarted = true;
     redraw();
+}
+
+function generateImage() {
+    let randomNum = int(random(1,3));
+    image(images[randomNum], 0, 0);
 }
 
 function generateSnowflake()  {
