@@ -7,9 +7,15 @@ let realSnowflakeButton;
 let computerSnowflakeButton;
 let images = [];
 
+
 //Misc Variables
 let score = 0;
+let round = 1;
 let scoreBoard;
+let randomGraphic;
+let answerSelected = false;
+let selection;
+let answer;
 
 //Generation parameters for snowflakes
 let symmetrieNumber = 6; //how many arms the snowflake has (typically 6)
@@ -45,7 +51,7 @@ function setup() {
     startButton.mousePressed(startGame);
 
     //Define selection buttons and Score Area
-    scoreBoard = createDiv('Current Score: ');
+    scoreBoard = createDiv('Current Score: ' + score);
     scoreBoard.position(450, 700);
     realSnowflakeButton = createButton('Real Snowflake');
     realSnowflakeButton.addClass('btn');
@@ -57,6 +63,8 @@ function setup() {
     computerSnowflakeButton.addClass('btn-danger');
     computerSnowflakeButton.position(600,650);
 
+
+
     computerSnowflakeButton.hide();
     realSnowflakeButton.hide();
     scoreBoard.hide();
@@ -64,14 +72,15 @@ function setup() {
 
 function draw() {
     if(gameStarted === false){
+        //Placeholder Image for game that has not started
         background(220);
         ellipse(50,50,80,80);
+        let s = 'PlaceHolder Image appears here until game starts';
+        fill(50);
+        text(s, 200, 250, 300, 300);
     }
     else {
-        //generateSnowflake();
-        // image(images[2], 0, 0);
-        generateImage();
-        // console.log("The game has started!");
+        playGame();
     }
 }
 
@@ -85,7 +94,36 @@ function startGame() {
     redraw();
 }
 
+function playGame() {
+    randomGraphic = int(random(0,2));
+
+    if (randomGraphic === 0 ) {
+        generateImage();
+    }
+    else {
+        generateSnowflake();
+    }
+    round++;
+}
+
+function keyPressed() {
+    if (keyCode === LEFT_ARROW && gameStarted  === true) {
+        console.log(score);
+        if(randomGraphic === 0 ) {
+            score++;
+        }
+        redraw();
+    } else if (keyCode === RIGHT_ARROW && gameStarted === true) {
+        console.log(score);
+        if(randomGraphic === 1 ) {
+            score++;
+        }
+        redraw();
+    }
+}
+
 function generateImage() {
+    background(0);
     let randomNum = int(random(1,3));
     image(images[randomNum], 0, 0);
 }
