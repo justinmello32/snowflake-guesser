@@ -1,21 +1,15 @@
-//Initial Variables
-let gameStarted = false;
-
 //Buttons and Images
 let startButton;
 let realSnowflakeButton;
 let computerSnowflakeButton;
 let images = [];
 
-
 //Misc Variables
+let gameStarted = false;
 let score = 0;
 let round = 1;
 let scoreBoard;
 let randomGraphic;
-let answerSelected = false;
-let selection;
-let answer;
 
 //Generation parameters for snowflakes
 let symmetrieNumber = 6; //how many arms the snowflake has (typically 6)
@@ -63,8 +57,6 @@ function setup() {
     computerSnowflakeButton.addClass('btn-danger');
     computerSnowflakeButton.position(600,650);
 
-
-
     computerSnowflakeButton.hide();
     realSnowflakeButton.hide();
     scoreBoard.hide();
@@ -95,11 +87,13 @@ function startGame() {
 function endGame() {
     gameStarted = false;
     background(220);
-    let s = 'The game has ended!';
+    let s = 'The game has ended! You scored: ' + score + ' out of 10';
     fill(50);
     text(s, 200, 250, 300, 300);
     realSnowflakeButton.hide();
     computerSnowflakeButton.hide();
+    scoreBoard.html("");
+    scoreBoard.hide();
     startButton.show();
     score = 0;
     round = 0;
@@ -112,7 +106,6 @@ function playGame() {
     }
     else {
         randomGraphic = int(random(0, 2));
-        console.log(round);
         if (randomGraphic === 0) {
             generateImage();
         } else {
