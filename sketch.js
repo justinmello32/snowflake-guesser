@@ -74,7 +74,6 @@ function draw() {
     if(gameStarted === false){
         //Placeholder Image for game that has not started
         background(220);
-        ellipse(50,50,80,80);
         let s = 'PlaceHolder Image appears here until game starts';
         fill(50);
         text(s, 200, 250, 300, 300);
@@ -85,7 +84,7 @@ function draw() {
 }
 
 function startGame() {
-    //Hide start button and show scores
+    //Hide start button, show buttons
     startButton.hide();
     scoreBoard.show();
     realSnowflakeButton.show();
@@ -93,29 +92,48 @@ function startGame() {
     gameStarted = true;
     redraw();
 }
+function endGame() {
+    gameStarted = false;
+    background(220);
+    let s = 'The game has ended!';
+    fill(50);
+    text(s, 200, 250, 300, 300);
+    realSnowflakeButton.hide();
+    computerSnowflakeButton.hide();
+    startButton.show();
+    score = 0;
+    round = 0;
+}
 
 function playGame() {
-    randomGraphic = int(random(0,2));
 
-    if (randomGraphic === 0 ) {
-        generateImage();
+    if(round > 9) {
+        endGame();
     }
     else {
-        generateSnowflake();
+        randomGraphic = int(random(0, 2));
+        console.log(round);
+        if (randomGraphic === 0) {
+            generateImage();
+        } else {
+            generateSnowflake();
+        }
+        round++;
     }
-    round++;
 }
 
 function keyPressed() {
     if (keyCode === LEFT_ARROW && gameStarted  === true) {
-        console.log(score);
+
         if(randomGraphic === 0 ) {
+            scoreBoard.html("Current Score: " + score);
             score++;
         }
         redraw();
     } else if (keyCode === RIGHT_ARROW && gameStarted === true) {
-        console.log(score);
+
         if(randomGraphic === 1 ) {
+            scoreBoard.html("Current Score: " + score);
             score++;
         }
         redraw();
