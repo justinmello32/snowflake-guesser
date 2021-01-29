@@ -41,21 +41,21 @@ function setup() {
     startButton = createButton('Start Game');
     startButton.addClass('btn');
     startButton.addClass('btn-success');
-    startButton.position(450, 650);
+    startButton.position(700, 700);
     startButton.mousePressed(startGame);
 
     //Define selection buttons and Score Area
     scoreBoard = createDiv('Current Score: ' + score);
-    scoreBoard.position(450, 700);
+    scoreBoard.position(800, 700);
     realSnowflakeButton = createButton('Real Snowflake');
     realSnowflakeButton.addClass('btn');
     realSnowflakeButton.addClass('btn-primary');
-    realSnowflakeButton.position(100,650);
+    realSnowflakeButton.position(700,750);
 
     computerSnowflakeButton = createButton("Graphic Snowflake");
     computerSnowflakeButton.addClass('btn');
     computerSnowflakeButton.addClass('btn-danger');
-    computerSnowflakeButton.position(600,650);
+    computerSnowflakeButton.position(900,750);
 
     computerSnowflakeButton.hide();
     realSnowflakeButton.hide();
