@@ -25,7 +25,7 @@ let strokeAlpha = 25; //alpha of the lines
 
 
 function preload() {
-    for (let i = 1; i < 3; i++) {
+    for (let i = 1; i < 6; i++) {
         images[i] = loadImage('assets/snowflake' + i + '.jpg'); // store the image location in array only
     }
 }
@@ -33,7 +33,7 @@ function preload() {
 function setup() {
 
     //Setup Canvas
-    var canvas = createCanvas(500, 500);
+    var canvas = createCanvas(800, 600);
     canvas.parent('main');
     noLoop();
 
@@ -135,7 +135,7 @@ function keyPressed() {
 
 function generateImage() {
     background(0);
-    let randomNum = int(random(1,3));
+    let randomNum = int(random(1,6));
     image(images[randomNum], 0, 0);
 }
 
