@@ -1,5 +1,6 @@
 //Buttons and Images
 let startButton;
+let startArea;
 let realSnowflakeButton;
 let computerSnowflakeButton;
 let images = [];
@@ -7,9 +8,8 @@ let images = [];
 //Misc Variables
 let gameStarted = false;
 let score = 0;
-let round = 1;
+let round = 0;
 let scoreBoard;
-let messages;
 let randomGraphic;
 
 //Generation parameters for snowflakes
@@ -39,10 +39,8 @@ function setup() {
     noLoop();
 
     //Define Start Button
-    startButton = createButton('Start Game');
-    startButton.addClass('btn');
-    startButton.addClass('btn-success');
-    startButton.position(700, 700);
+    startButton = select('#start-button');
+    startArea = select('#start-area');
     startButton.mousePressed(startGame);
 
     //Define selection buttons and Score Area
@@ -78,7 +76,7 @@ function draw() {
 
 function startGame() {
     //Hide start button, show buttons
-    startButton.hide();
+    startArea.hide();
     scoreBoard.show();
     realSnowflakeButton.show();
     computerSnowflakeButton.show();
