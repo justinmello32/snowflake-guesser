@@ -9,7 +9,6 @@ let images = [];
 let gameStarted = false;
 let score = 0;
 let round = 0;
-let scoreBoard;
 let randomGraphic;
 
 //Generation parameters for snowflakes
@@ -44,8 +43,6 @@ function setup() {
     startButton.mousePressed(startGame);
 
     //Define selection buttons and Score Area
-    scoreBoard = createDiv('Current Score: ' + score);
-    scoreBoard.position(800, 700);
     realSnowflakeButton = createButton('Real Snowflake');
     realSnowflakeButton.addClass('btn');
     realSnowflakeButton.addClass('btn-primary');
@@ -58,7 +55,6 @@ function setup() {
 
     computerSnowflakeButton.hide();
     realSnowflakeButton.hide();
-    scoreBoard.hide();
 }
 
 function draw() {
@@ -77,7 +73,6 @@ function draw() {
 function startGame() {
     //Hide start button, show buttons
     startArea.hide();
-    scoreBoard.show();
     realSnowflakeButton.show();
     computerSnowflakeButton.show();
     gameStarted = true;
@@ -91,8 +86,6 @@ function endGame() {
     text(s, 200, 250, 300, 300);
     realSnowflakeButton.hide();
     computerSnowflakeButton.hide();
-    scoreBoard.html("");
-    scoreBoard.hide();
     startButton.show();
     score = 0;
     round = 0;
@@ -118,7 +111,6 @@ function keyPressed() {
     if (keyCode === LEFT_ARROW && gameStarted  === true) {
 
         if(randomGraphic === 0 ) {
-            scoreBoard.html("Current Score: " + score);
             score++;
             displayAlert(1);
         }
@@ -129,7 +121,6 @@ function keyPressed() {
     } else if (keyCode === RIGHT_ARROW && gameStarted === true) {
 
         if(randomGraphic === 1 ) {
-            scoreBoard.html("Current Score: " + score);
             score++;
             displayAlert(1);
         }
