@@ -9,6 +9,7 @@ let gameStarted = false;
 let score = 0;
 let round = 1;
 let scoreBoard;
+let messages;
 let randomGraphic;
 
 //Generation parameters for snowflakes
@@ -120,14 +121,22 @@ function keyPressed() {
 
         if(randomGraphic === 0 ) {
             scoreBoard.html("Current Score: " + score);
+            displayAlert(1);
             score++;
+        }
+        else {
+            displayAlert(0);
         }
         redraw();
     } else if (keyCode === RIGHT_ARROW && gameStarted === true) {
 
         if(randomGraphic === 1 ) {
             scoreBoard.html("Current Score: " + score);
+            displayAlert(1);
             score++;
+        }
+        else {
+            displayAlert(0);
         }
         redraw();
     }
@@ -137,6 +146,7 @@ function generateImage() {
     background(0);
     let randomNum = int(random(1,6));
     image(images[randomNum], 0, 0);
+
 }
 
 function generateSnowflake()  {
@@ -167,4 +177,16 @@ function generateBranch(origin, length, angle) {
     strokeWeight(thicknesIsLengthDependent ? (thickness * (length * thicknesFactor)) : thickness);
     line(0, 0, length, 0);
     pop();
+}
+
+function displayAlert(result) {
+    if (result === 1) {
+        document.getElementById("alerts").innerHTML = "That was correct! Nice Job!";
+        document.getElementById('alerts').classList.remove('alert-danger');
+        document.getElementById('alerts').classList.add('alert-success');
+    } else {
+        document.getElementById("alerts").innerHTML = "I'm sorry, that was incorrect.";
+        document.getElementById('alerts').classList.remove('alert-success');
+        document.getElementById('alerts').classList.add('alert-danger');
+    }
 }
