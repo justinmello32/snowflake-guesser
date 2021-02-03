@@ -4,6 +4,7 @@ let startArea;
 let realSnowflakeButton;
 let computerSnowflakeButton;
 let images = [];
+let c1, c2;
 
 //Misc Variables
 let gameStarted = false;
@@ -14,8 +15,8 @@ let randomGraphic;
 //Generation parameters for snowflakes
 let symmetrieNumber = 6; //how many arms the snowflake has (typically 6)
 let angleVarianzPIDivider = 4; //PI is divided by this number to define the variance in branching angles
-let radius = 200; //randius of the snowflake
-let endLength = 2; //length of the branch at which recursions stops
+let radius; //randius of the snowflake
+let endLength; //length of the branch at which recursions stops
 
 //Drawing parameters for snowflakes
 let thickness = 6; //thicknes of the lines
@@ -140,6 +141,22 @@ function generateImage() {
 
 function generateSnowflake()  {
     background(0);
+
+    //Generate Colors used for gradient
+    c1 = color(255);
+    c2 = color(63, 191, 191);
+
+    //Apply gradient
+    for(let y=0; y<height; y++){
+        n = map(y,0,height,0,1);
+        let newc = lerpColor(c1,c2,n);
+        stroke(newc);
+        line(0,y,width, y);
+    }
+
+    //Random radius and end lengths of snowflakes
+    radius = int(random(45, 180));
+    endLength = int(random(1, 6));
 
     let seed = random(255);
     for (let i = 0; i < symmetrieNumber; ++i) {
