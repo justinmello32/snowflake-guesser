@@ -119,8 +119,8 @@ function keyPressed() {
 
         if(randomGraphic === 0 ) {
             scoreBoard.html("Current Score: " + score);
-            displayAlert(1);
             score++;
+            displayAlert(1);
         }
         else {
             displayAlert(0);
@@ -130,8 +130,8 @@ function keyPressed() {
 
         if(randomGraphic === 1 ) {
             scoreBoard.html("Current Score: " + score);
-            displayAlert(1);
             score++;
+            displayAlert(1);
         }
         else {
             displayAlert(0);
@@ -179,11 +179,13 @@ function generateBranch(origin, length, angle) {
 
 function displayAlert(result) {
     if (result === 1) {
-        document.getElementById("alerts").innerHTML = "That was correct! Nice Job!";
+        document.getElementById("alerts").innerHTML = "That was correct! Nice Job! \n";
+        document.getElementById("alerts").append("Your current score is " + score + " out of " + round + " rounds.");
         document.getElementById('alerts').classList.remove('alert-danger');
         document.getElementById('alerts').classList.add('alert-success');
     } else {
-        document.getElementById("alerts").innerHTML = "I'm sorry, that was incorrect.";
+        document.getElementById("alerts").innerHTML = "I'm sorry, that was incorrect. \n";
+        document.getElementById("alerts").append("Your current score is " + score + " out of " + round + " rounds.");
         document.getElementById('alerts').classList.remove('alert-success');
         document.getElementById('alerts').classList.add('alert-danger');
     }
