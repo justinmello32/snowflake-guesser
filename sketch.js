@@ -8,6 +8,7 @@ let realSnowflakeButton;
 let computerSnowflakeButton;
 let images = [];
 let c1, c2;
+let snowflakes = []; // array to hold snowflake objects
 
 //Misc Variables
 let gameStarted = false;
@@ -39,7 +40,8 @@ function setup() {
     //Setup Canvas
     var canvas = createCanvas(800, 600);
     canvas.parent('main');
-    noLoop();
+    fill(240);
+    noStroke();
 
     //Define Start Button
     startButton = select('#start-button');
@@ -66,11 +68,8 @@ function setup() {
 
 function draw() {
     if(gameStarted === false){
-        //Placeholder Image for game that has not started
-        background(220);
-        let s = 'PlaceHolder Image appears here until game starts';
-        fill(50);
-        text(s, 200, 250, 300, 300);
+
+        displayPlaceHolder();
     }
     else {
         playGame();
@@ -88,21 +87,28 @@ function startGame() {
 }
 function endGame() {
     gameStarted = false;
-    mainArea.hide();
-    alertsArea.hide();
-    resultsArea.show();
-    resultsArea.html("You scored: " + score);
-    startArea.show();
 
+    if(score > 6) {
+        document.getElementById("alerts").innerHTML = "Great job! You scored " + score + " out of 10 rounds!";
+        document.getElementById('alerts').classList.remove('alert-danger');
+        document.getElementById('alerts').classList.add('alert-success');
+    }
+    else {
+        document.getElementById("alerts").innerHTML = "Sorry, you only scored " + score + " out of 10 rounds Better luck next time!";
+        document.getElementById('alerts').classList.remove('alert-success');
+        document.getElementById('alerts').classList.add('alert-danger');
+    }
 
     realSnowflakeButton.hide();
     computerSnowflakeButton.hide();
+    loop();
+    displayPlaceHolder();
     score = 0;
     round = 0;
 }
 
 function playGame() {
-
+    noLoop();
     if(round > 9) {
         endGame();
     }
@@ -207,3 +213,51 @@ function displayAlert(result) {
         document.getElementById('alerts').classList.add('alert-danger');
     }
 }
+
+function displayPlaceHolder() {
+    background(0);
+    let t = frameCount / 60; // update time
+
+    // create a random number of snowflakes each frame
+    for (let i = 0; i < random(5); i++) {
+        snowflakes.push(new snowflake()); // append snowflake object
+    }
+
+    // loop through snowflakes with a for..of loop
+    for (let flake of snowflakes) {
+        flake.update(t); // update snowflake position
+        flake.display(); // draw snowflake
+    }
+}
+function snowflake() {
+    // initialize coordinates
+    this.posX = 0;
+    this.posY = random(-50, 0);
+    this.initialangle = random(0, 2 * PI);
+    this.size = random(2, 5);
+
+    // radius of snowflake spiral
+    // chosen so the snowflakes are uniformly spread out in area
+    this.radius = sqrt(random(pow(width / 2, 2)));
+
+    this.update = function(time) {
+        // x position follows a circle
+        let w = 0.6; // angular speed
+        let angle = w * time + this.initialangle;
+        this.posX = width / 2 + this.radius * sin(angle);
+
+        // different size snowflakes fall at slightly different y speeds
+        this.posY += pow(this.size, 0.5);
+
+        // delete snowflake if past end of screen
+        if (this.posY > height) {
+            let index = snowflakes.indexOf(this);
+            snowflakes.splice(index, 1);
+        }
+    };
+
+    this.display = function() {
+        ellipse(this.posX, this.posY, this.size);
+    };
+}
+

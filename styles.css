@@ -13,6 +13,10 @@ html, body {
   align-items: center;
 }
 
+.p5Canvas {
+  border-radius: 15px;
+}
+
 #results-area {
   margin-top: 18em;
 }
