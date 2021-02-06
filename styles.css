@@ -12,3 +12,7 @@ html, body {
   /* This centers our sketch vertically. */
   align-items: center;
 }
+
+#results-area {
+  margin-top: 18em;
+}

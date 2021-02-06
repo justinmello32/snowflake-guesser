@@ -1,6 +1,9 @@
 //Buttons and Images
 let startButton;
 let startArea;
+let mainArea;
+let resultsArea;
+let alertsArea;
 let realSnowflakeButton;
 let computerSnowflakeButton;
 let images = [];
@@ -41,6 +44,9 @@ function setup() {
     //Define Start Button
     startButton = select('#start-button');
     startArea = select('#start-area');
+    mainArea = select('#main');
+    resultsArea = select('#results-area');
+    alertsArea = select('#alerts');
     startButton.mousePressed(startGame);
 
     //Define selection buttons and Score Area
@@ -73,6 +79,7 @@ function draw() {
 
 function startGame() {
     //Hide start button, show buttons
+    resultsArea.hide();
     startArea.hide();
     realSnowflakeButton.show();
     computerSnowflakeButton.show();
@@ -81,13 +88,15 @@ function startGame() {
 }
 function endGame() {
     gameStarted = false;
-    background(220);
-    let s = 'The game has ended! You scored: ' + score + ' out of 10';
-    fill(50);
-    text(s, 200, 250, 300, 300);
+    mainArea.hide();
+    alertsArea.hide();
+    resultsArea.show();
+    resultsArea.html("You scored: " + score);
+    startArea.show();
+
+
     realSnowflakeButton.hide();
     computerSnowflakeButton.hide();
-    startButton.show();
     score = 0;
     round = 0;
 }
