@@ -4,6 +4,7 @@ let startArea;
 let mainArea;
 let resultsArea;
 let alertsArea;
+let playArea;
 let realSnowflakeButton;
 let computerSnowflakeButton;
 let images = [];
@@ -43,27 +44,18 @@ function setup() {
     fill(240);
     noStroke();
 
-    //Define Start Button
+    //Define Areas and Buttons
     startButton = select('#start-button');
     startArea = select('#start-area');
     mainArea = select('#main');
     resultsArea = select('#results-area');
     alertsArea = select('#alerts');
+    playArea = select('#play-area');
+    realSnowflakeButton = select('real-snowflake');
+    computerSnowflakeButton = select('computer-snowflake');
+    playArea.hide();
     startButton.mousePressed(startGame);
 
-    //Define selection buttons and Score Area
-    realSnowflakeButton = createButton('Real Snowflake');
-    realSnowflakeButton.addClass('btn');
-    realSnowflakeButton.addClass('btn-primary');
-    realSnowflakeButton.position(700,750);
-
-    computerSnowflakeButton = createButton("Graphic Snowflake");
-    computerSnowflakeButton.addClass('btn');
-    computerSnowflakeButton.addClass('btn-danger');
-    computerSnowflakeButton.position(900,750);
-
-    computerSnowflakeButton.hide();
-    realSnowflakeButton.hide();
 }
 
 function draw() {
@@ -78,16 +70,17 @@ function draw() {
 
 function startGame() {
     //Hide start button, show buttons
-    resultsArea.hide();
+    document.getElementById("alerts").innerHTML = "";
+    document.getElementById('alerts').classList.remove('alert-success');
+    document.getElementById('alerts').classList.remove('alert-danger');
     startArea.hide();
-    realSnowflakeButton.show();
-    computerSnowflakeButton.show();
+    playArea.show();
     gameStarted = true;
     redraw();
 }
 function endGame() {
     gameStarted = false;
-
+    playArea.hide();
     if(score > 6) {
         document.getElementById("alerts").innerHTML = "Great job! You scored " + score + " out of 10 rounds!";
         document.getElementById('alerts').classList.remove('alert-danger');
@@ -99,12 +92,12 @@ function endGame() {
         document.getElementById('alerts').classList.add('alert-danger');
     }
 
-    realSnowflakeButton.hide();
-    computerSnowflakeButton.hide();
     loop();
-    displayPlaceHolder();
     score = 0;
     round = 0;
+    startArea.show();
+    displayPlaceHolder();
+
 }
 
 function playGame() {
