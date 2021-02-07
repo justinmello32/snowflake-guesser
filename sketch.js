@@ -39,7 +39,7 @@ function preload() {
 function setup() {
 
     //Setup Canvas
-    var canvas = createCanvas(800, 600);
+    var canvas = createCanvas(750, 550);
     canvas.parent('main');
     fill(240);
     noStroke();
@@ -51,8 +51,10 @@ function setup() {
     resultsArea = select('#results-area');
     alertsArea = select('#alerts');
     playArea = select('#play-area');
-    realSnowflakeButton = select('real-snowflake');
-    computerSnowflakeButton = select('computer-snowflake');
+    realSnowflakeButton = select('#real-snowflake');
+    realSnowflakeButton.mousePressed(function() { checkAnswer(0);});
+    computerSnowflakeButton = select('#computer-snowflake');
+    computerSnowflakeButton.mousePressed(function() { checkAnswer(1);});
     playArea.hide();
     startButton.mousePressed(startGame);
 
@@ -60,10 +62,10 @@ function setup() {
 
 function draw() {
     if(gameStarted === false){
-
         displayPlaceHolder();
     }
     else {
+        console.log(round);
         playGame();
     }
 }
@@ -112,13 +114,12 @@ function playGame() {
         } else {
             generateSnowflake();
         }
-        round++;
     }
+    round++;
 }
 
-function keyPressed() {
-    if (keyCode === LEFT_ARROW && gameStarted  === true) {
-
+function checkAnswer(choice) {
+    if(choice === 0 && gameStarted === true) {
         if(randomGraphic === 0 ) {
             score++;
             displayAlert(1);
@@ -127,8 +128,8 @@ function keyPressed() {
             displayAlert(0);
         }
         redraw();
-    } else if (keyCode === RIGHT_ARROW && gameStarted === true) {
-
+    }
+    if(choice === 1 && gameStarted === true){
         if(randomGraphic === 1 ) {
             score++;
             displayAlert(1);
@@ -138,7 +139,9 @@ function keyPressed() {
         }
         redraw();
     }
+
 }
+
 
 function generateImage() {
     background(0);
@@ -222,6 +225,7 @@ function displayPlaceHolder() {
         flake.display(); // draw snowflake
     }
 }
+
 function snowflake() {
     // initialize coordinates
     this.posX = 0;
