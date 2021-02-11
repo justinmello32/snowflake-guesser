@@ -10,6 +10,10 @@ let computerSnowflakeButton;
 let images = [];
 let c1, c2;
 let snowflakes = []; // array to hold snowflake objects
+let r;
+let g;
+let b;
+let a;
 
 //Misc Variables
 let gameStarted = false;
@@ -155,7 +159,11 @@ function generateSnowflake()  {
 
     //Generate Colors used for gradient
     c1 = color(255);
-    c2 = color(63, 191, 191);
+    r = random(255); // r is a random number between 0 - 255
+    g = random(100,200); // g is a random number betwen 100 - 200
+    b = random(100); // b is a random number between 0 - 100
+    a = random(200,255); // a is a random number between 200 - 255
+    c2 = color(r,g,b,a);
 
     //Apply gradient
     for(let y=0; y<height; y++){
