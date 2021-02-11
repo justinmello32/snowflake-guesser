@@ -69,7 +69,7 @@ function draw() {
         displayPlaceHolder();
     }
     else {
-        console.log(round);
+        console.log("This is round: " + round);
         playGame();
     }
 }
@@ -108,18 +108,19 @@ function endGame() {
 
 function playGame() {
     noLoop();
-    if(round > 9) {
+    if(round > 10) {
         endGame();
     }
     else {
         randomGraphic = int(random(0, 2));
         if (randomGraphic === 0) {
             generateImage();
+            round++;
         } else {
             generateSnowflake();
+            round++;
         }
     }
-    round++;
 }
 
 function checkAnswer(choice) {
@@ -211,12 +212,12 @@ function generateBranch(origin, length, angle) {
 function displayAlert(result) {
     if (result === 1) {
         document.getElementById("alerts").innerHTML = "That was correct! Nice Job! \n";
-        document.getElementById("alerts").append("Your current score is " + score + " out of " + round + " rounds.");
+        document.getElementById("alerts").append("Your current score is " + score + " out of " + (round - 1) + " rounds.");
         document.getElementById('alerts').classList.remove('alert-danger');
         document.getElementById('alerts').classList.add('alert-success');
     } else {
         document.getElementById("alerts").innerHTML = "I'm sorry, that was incorrect. \n";
-        document.getElementById("alerts").append("Your current score is " + score + " out of " + round + " rounds.");
+        document.getElementById("alerts").append("Your current score is " + score + " out of " + (round - 1) + " rounds.");
         document.getElementById('alerts').classList.remove('alert-success');
         document.getElementById('alerts').classList.add('alert-danger');
     }
